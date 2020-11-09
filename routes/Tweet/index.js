@@ -16,8 +16,15 @@ const updateTweet = require("./updateTweet");
 const getTweetById = require("./getTweetById");
 const getTweetByTweetId = require("./getTweetByTweetId");
 
+/**
+ * @api {get} /tweets/me Gets all tweets by logged in user
+ */
 tweet.get("/me", auth, getTweet);
-// tweet.get("/:userId", auth, getUserTweetRules(), validate, getTweetById);
+
+/**
+ * @api {get} /tweets/:tweetId Get specific tweet info.
+ * @params {MongoId} tweetId
+ */
 tweet.get(
   "/:tweetId",
   auth,
@@ -25,7 +32,23 @@ tweet.get(
   validate,
   getTweetByTweetId
 );
+
+/**
+ * @api {post} /tweets/  posts a new tweet from user
+ * @params {String} content
+ */
 tweet.post("/", auth, tweetPostRules(), validate, postTweet);
+
+/**
+ * @api {delete} /tweets/:tweetId deletes a user's tweet
+ * @params {MongoId} tweetId
+ */
 tweet.delete("/:tweetId", auth, tweetDeleteRules(), validate, deleteTweet);
+
+/**
+ * @api {put} /tweets/:tweetId updates a user's tweet
+ * @params {MongoId} tweetId
+ */
 tweet.put("/:tweetId", auth, tweetUpdateRules(), validate, updateTweet);
+
 module.exports = tweet;

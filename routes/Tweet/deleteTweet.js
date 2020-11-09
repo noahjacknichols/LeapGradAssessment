@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
     const Tweet = mongoose.model("Tweet", TweetSchema);
     Tweet.deleteOne(
       { _id: req.params.tweetId, from: req.user.id },
-      async (err, deleted) => {
+      (err, deleted) => {
         if (err)
           return next({
             status: 400,
@@ -20,6 +20,7 @@ module.exports = async (req, res, next) => {
             message: "could not find tweet with specified id",
           });
 
+        //could be 204 but prefer 200 with message
         return res.status(200).json({ message: "deleted successfully" });
       }
     );

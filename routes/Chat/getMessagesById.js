@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const UserSchema = require("../../models/user");
 const MessageSchema = require("../../models/chat");
+
+/**
+ * perhaps I'm adding business logic, but I assumed messaging a user means
+ * both user's must still exist
+ **/
 module.exports = async (req, res, next) => {
   try {
     const User = mongoose.model("User", UserSchema);
