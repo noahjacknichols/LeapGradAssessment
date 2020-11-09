@@ -35,7 +35,7 @@ tweet.get(
 
 /**
  * @api {post} /tweets/  posts a new tweet from user
- * @params {String} content
+ * @params {String} content (1-255 characters)
  */
 tweet.post("/", auth, tweetPostRules(), validate, postTweet);
 
